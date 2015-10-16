@@ -1,0 +1,10 @@
+*.box
+*.ISO
+*.iso
+*.lock
+.tmp
+.vagrant
+.DS_Store
+.rpsec
+packer_cache
+output*
