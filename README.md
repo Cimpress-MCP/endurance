@@ -1,4 +1,4 @@
-# Endurance
+#Endurance
 
 This repo is meant to be a very simple way to build out windows boxes for the
 [VirtualBox](https://www.virtualbox.org/wiki/Downloads) provider with [Packer](https://packer.io)
@@ -16,8 +16,7 @@ for use with [Vagrant](http://vagrantup.com).
 ### Repo specific pre-requisites
 
 * Clone this repo locally
-* Gather up your windows ISOs ( Windows2012R2 ) and place them in the corresponding ISOs folder. You
-can find these in various locations some listed below.
+* Gather up your windows ISOs ( Windows7, Windows2008 and Windows2012R2 ) and place them in the corresponding ISOs folder
   * [Microsoft Evaluation Center](https://www.microsoft.com/en-us/evalcenter/)
   * [MSDN](https://msdn.microsoft.com/en-us/default.aspx)
   * Any local sources
@@ -32,8 +31,9 @@ Once you have cleared the above pre-requisites run the following at the root of 
 > Rake build
 ```
 
-Once the above has finished you should see two vagrant boxes in the box directory.
-
+Once the above has finished you should see three vagrant boxes in the box directory.
+* vagrant-windows7.box
+* vagrant-windows2008.box
 * vagrant-windows2012R2.box
 * vagrant-windows2012R2Core.box
 
@@ -85,17 +85,9 @@ v.memory = 2048
 v.cpus = 1
 ```
 
-### Default Installs
-
-Each of the boxes will have the following packages installed. These can be modified in the packer .json files if needed.
-
-* Git - Latest chocolatey version
-* Chef - 12.1.0.1
-* Puppet - Latest chocolatey version
-
 ### License Keys
 
-All of the included ```Autounattend.xml``` files have no Windows activation key set. This can be set
+All of the included ```Autounattend.xml``` files have no windows activation key set. This can be set
 in the following location in each ```Autounattend.xml```
 
 ```
@@ -110,30 +102,27 @@ in the following location in each ```Autounattend.xml```
 
 ### Testing
 
-This repo has been tested using the following setups. But should work with various configurations of the listed software packages.
+This repo has been tested using the following setup.
 
-#### Windows 8.1:
+####Windows 8.1:
 * [Vagrant](http://vagrantup.com) - **1.7.4**
 * [Packer](http://packer.io) - **0.8.2**
-* [VirtualBox](https://www.virtualbox.org/wiki/Downloads) - **5.0.2 r102096**
+* [VirtualBox](https://www.virtualbox.org/wiki/Downloads) - **5.0.0**
 * [Ruby](https://www.ruby-lang.org/en/documentation/installation/) - **1.9.3**
 
-#### OSX 10.10.3
+####OSX 10.10.3
 * [Vagrant](http://vagrantup.com) - **1.7.4**
 * [Packer](http://packer.io) - **0.8.2**
-* [VirtualBox](https://www.virtualbox.org/wiki/Downloads) - **5.0.6 r103037**
+* [VirtualBox](https://www.virtualbox.org/wiki/Downloads) - **5.0.0**
 * [Ruby](https://www.ruby-lang.org/en/documentation/installation/) - **1.9.3**
 
 ### ServerSpec
 
-Currently the ServerSpec checks are looking for a few basic items.
+Currently the ServerSpec checks are looking for three basic items.
 
+* Vagrant is a user that is in Administrators.
 * Powershell ExecutionPolicy is set to Bypass.
 * Chocolatey has installed correctly.
-* Git has installed correctly.
-* Puppet has installed correctly.
-* Chef has installed correctly.
-* VirtualBox Guest Additions have been installed.
 
 ### Special thanks
 

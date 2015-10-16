@@ -3,6 +3,8 @@ require 'rspec/core/rake_task'
 require 'fileutils'
 
 task :spec            => 'spec:all'
+task :specwin7        => 'spec:win7'
+task :specwin2008     => 'spec:win2008'
 task :specwin2012R2     => 'spec:win2012R2'
 task :specwin2012R2Core => 'spec:win2012R2Core'
 
@@ -21,29 +23,39 @@ task :destroy do
 end
 
 desc 'Build all boxes and ServerSpec them'
-task 'build' => [:build2012R2, :build2012R2Core, :vagrant, :spec, :destroy ]
+task 'build' => [:build7, :build2008, :build2012R2, :build2012R2Core, :vagrant, :specwin7, :specwin2008, :specwin2012R2, :specwin2012R2Core, :destroy ]
+
+task :build7 do
+  if !File.exist? './box/vagrant-windows7.box'
+    win7iso = Dir.glob(Dir.pwd + "/isos/win7/*.iso", File::FNM_CASEFOLD)[0]
+    system("packer build -var iso=\"#{win7iso}\" win7/win7.json ")
+  else
+    printf("vagrant-windows7.box already exists moving on \n")
+  end
+end
+
+task :build2008 do
+  if !File.exist? './box/vagrant-windows2008.box'
+    win2008iso = Dir.glob(Dir.pwd + "/isos/win2008/*.iso", File::FNM_CASEFOLD)[0]
+    system("packer build -var iso=\"#{win2008iso}\" win2008/win2008.json ")
+  else
+    printf("vagrant-windows2008.box already exists moving on \n")
+  end
+end
 
 task :build2012R2 do
-  if !File.exist? '/box/vagrant-windows2012R2.box'
+  if !File.exist? './box/vagrant-windows2012R2.box'
     win2012R2iso = Dir.glob(Dir.pwd + "/isos/win2012R2/*.iso", File::FNM_CASEFOLD)[0]
-    if !File.exist? "#{win2012R2iso}"
-      fail "Error: Missing ISO file"
-    else
-      system("packer build -var iso=\"#{win2012R2iso}\" win2012R2/win2012R2.json ")
-    end
+    system("packer build -var iso=\"#{win2012R2iso}\" win2012R2/win2012R2.json ")
   else
     printf("vagrant-windows2012R2.box already exists moving on \n")
   end
 end
 
 task :build2012R2Core do
-  if !File.exist? '/box/vagrant-windows2012R2Core.box'
-    win2012R2Coreiso = Dir.glob(Dir.pwd + "/isos/win2012R2/*.iso", File::FNM_CASEFOLD)[0]
-    if !File.exist? "#{win2012R2Coreiso}"
-      raise "Error: Missing ISO file"
-    else
-      system("packer build -var iso=\"#{win2012R2Coreiso}\" win2012R2Core/win2012R2Core.json ")
-    end
+  if !File.exist? './box/vagrant-windows2012R2Core.box'
+    win2012R2Coreiso = Dir.glob(Dir.pwd + "./isos/win2012R2/*.iso", File::FNM_CASEFOLD)[0]
+    system("packer build -var iso=\"#{win2012R2Coreiso}\" win2012R2Core/win2012R2Core.json ")
   else
     printf("vagrant-windows2012R2Core.box already exists moving on \n")
   end
