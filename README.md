@@ -31,7 +31,7 @@ Once you have cleared the above pre-requisites run the following at the root of 
 > Rake build
 ```
 
-Once the above has finished you should see three vagrant boxes in the box directory.
+Once the above has finished you should see four vagrant boxes in the box directory.
 
 * vagrant-windows7.box
 * vagrant-windows2008.box
@@ -93,7 +93,6 @@ Each of the boxes will have the following packages installed. These can be modif
 * Git - Latest chocolatey version
 * Chef - 12.1.0.1
 * Puppet - Latest chocolatey version
-
 
 ### License Keys
 
