@@ -1,0 +1,55 @@
+{
+    "variables": {
+      "iso": "",
+      "boxname": "vagrant-windows7.box"
+    },
+    "builders": [{
+      "type": "virtualbox-iso",
+      "communicator": "winrm",
+      "vm_name": "windows_7",
+      "iso_url": "{{user `iso`}}",
+      "iso_checksum_type": "none",
+      "guest_os_type": "Windows7_64",
+      "boot_wait": "2m",
+      "headless": true,
+      "winrm_username": "vagrant",
+      "winrm_password": "vagrant",
+      "winrm_timeout": "10m",
+      "winrm_port": "55985",
+      "guest_additions_mode": "disable",
+      "shutdown_timeout": "1h",
+      "shutdown_command": "shutdown /s /t 10 /f /d p:4:1 /c \"Packer Shutdown\"",
+      "disk_size": 36000,
+      "vboxmanage": [
+        ["modifyvm", "{{.Name}}","--vram", "30"],
+        ["modifyvm", "{{.Name}}","--cpus", "2" ],
+        ["modifyvm", "{{.Name}}","--memory", "4096" ],
+        ["modifyvm", "{{.Name}}", "--natpf1", "winrm,tcp,,55985,,5985" ]
+      ],
+      "format": "ova",
+      "floppy_files": [
+        "./win7/Autounattend.xml"
+      ]
+    }],
+    "provisioners": [{
+      "type": "powershell",
+      "scripts": [
+        "./scripts/bootstrap.ps1",
+        "./scripts/choco.ps1",
+        "./scripts/pagefile.ps1"
+      ]
+    },{
+      "type": "powershell",
+      "inline": [
+        "choco install -y puppet",
+        "choco install -y chef-client -version 12.1.0.1",
+        "choco install -y git  --params=\"/GitAndUnixToolsOnPath\""
+      ]
+    }],
+    "post-processors": [{
+      "type": "vagrant",
+      "output": "./box/vagrant-windows7.box",
+      "vagrantfile_template": "./win7/Vagrantfile",
+      "compression_level": 9
+    }]
+  }

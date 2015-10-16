@@ -16,8 +16,7 @@ for use with [Vagrant](http://vagrantup.com).
 ### Repo specific pre-requisites
 
 * Clone this repo locally
-* Gather up your windows ISOs ( Windows2012R2 ) and place them in the corresponding ISOs folder. You
-can find these in various locations some listed below.
+* Gather up your windows ISOs ( Windows7, Windows2008 and Windows2012R2 ) and place them in the corresponding ISOs folder.  You can find these in various locations some listed below.
   * [Microsoft Evaluation Center](https://www.microsoft.com/en-us/evalcenter/)
   * [MSDN](https://msdn.microsoft.com/en-us/default.aspx)
   * Any local sources
@@ -32,8 +31,10 @@ Once you have cleared the above pre-requisites run the following at the root of 
 > Rake build
 ```
 
-Once the above has finished you should see two vagrant boxes in the box directory.
+Once the above has finished you should see four vagrant boxes in the box directory.
 
+* vagrant-windows7.box
+* vagrant-windows2008.box
 * vagrant-windows2012R2.box
 * vagrant-windows2012R2Core.box
 

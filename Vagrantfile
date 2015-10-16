@@ -10,6 +10,37 @@ Vagrant.configure(2) do |config|
     system "vagrant plugin install #{plugin}" unless Vagrant.has_plugin? plugin
   end
 
+  config.vm.define "win7" do |win7|
+    win7.vm.box = "vagrant-windows7"
+    win7.vm.box_url = "./box/vagrant-windows7.box"
+    win7.vm.network :private_network, ip: "192.168.200.200"
+    win7.vm.provision "shell",
+      run: "always",
+      inline: "netsh advfirewall firewall set rule name=\"Windows Remote Management (HTTP-In)\" profile=private dir=in new profile=\"private,public\""
+    win7.vm.hostname = "Win7"
+    win7.hostsupdater.aliases = ["win7"]
+    win7.vm.provider "virtualbox" do |v|
+      v.name = "Win"
+      v.gui = false
+    end
+    win7.winrm.username = "vagrant"
+    win7.winrm.password = "vagrant"
+  end
+
+  config.vm.define "win2008" do |win2008|
+    win2008.vm.box = "vagrant-windows2008"
+    win2008.vm.box_url = "./box/vagrant-windows2008.box"
+    win2008.vm.network :private_network, ip: "192.168.200.50"
+    win2008.vm.hostname = "Win2008"
+    win2008.hostsupdater.aliases = ["win2008"]
+    win2008.vm.provider "virtualbox" do |v|
+      v.name = "Win2008"
+      v.gui = false
+    end
+    win2008.winrm.username = "vagrant"
+    win2008.winrm.password = "vagrant"
+  end
+
   config.vm.define "win2012R2" do |win2012R2|
     win2012R2.vm.box = "vagrant-windows2012R2"
     win2012R2.vm.box_url = "./box/vagrant-windows2012R2.box"

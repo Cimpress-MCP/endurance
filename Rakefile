@@ -3,6 +3,8 @@ require 'rspec/core/rake_task'
 require 'fileutils'
 
 task :spec            => 'spec:all'
+task :specwin7        => 'spec:win7'
+task :specwin2008     => 'spec:win2008'
 task :specwin2012R2     => 'spec:win2012R2'
 task :specwin2012R2Core => 'spec:win2012R2Core'
 
@@ -21,7 +23,33 @@ task :destroy do
 end
 
 desc 'Build all boxes and ServerSpec them'
-task 'build' => [:build2012R2, :build2012R2Core, :vagrant, :spec, :destroy ]
+task 'build' => [:build7, :build2008, :build2012R2, :build2012R2Core, :vagrant, :spec, :destroy ]
+
+task :build7 do
+  if !File.exist? '/box/vagrant-windows7.box'
+    win7iso = Dir.glob(Dir.pwd + "/isos/win7/*.iso", File::FNM_CASEFOLD)[0]
+    if !File.exist? "#{win7iso}"
+      fail "Error: Missing ISO file"
+    else
+      system("packer build -var iso=\"#{win7iso}\" win7/win7.json ")
+    end
+  else
+    printf("vagrant-windows7.box already exists moving on \n")
+  end
+end
+
+task :build2008 do
+  if !File.exist? '/box/vagrant-windows2008.box'
+    win2008iso = Dir.glob(Dir.pwd + "/isos/win2008/*.iso", File::FNM_CASEFOLD)[0]
+    if !File.exist? "#{win2008iso}"
+      fail "Error: Missing ISO file"
+    else
+      system("packer build -var iso=\"#{win2008iso}\" win2008/win2008.json ")
+    end
+  else
+    printf("vagrant-windows2008.box already exists moving on \n")
+  end
+end
 
 task :build2012R2 do
   if !File.exist? '/box/vagrant-windows2012R2.box'
