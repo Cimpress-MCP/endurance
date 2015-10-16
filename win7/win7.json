@@ -1,15 +1,15 @@
 {
     "variables": {
       "iso": "",
-      "boxname": "vagrant-windows2012R2Core.box"
+      "boxname": "vagrant-windows7.box"
     },
     "builders": [{
       "type": "virtualbox-iso",
       "communicator": "winrm",
-      "vm_name": "windows_2012Core_r2",
+      "vm_name": "windows_7",
       "iso_url": "{{user `iso`}}",
       "iso_checksum_type": "none",
-      "guest_os_type": "Windows2012_64",
+      "guest_os_type": "Windows7_64",
       "boot_wait": "2m",
       "headless": false,
       "winrm_username": "vagrant",
@@ -28,7 +28,7 @@
       ],
       "format": "ova",
       "floppy_files": [
-        "./win2012R2Core/Autounattend.xml"
+        "./win7/Autounattend.xml"
       ]
     }],
     "provisioners": [{
@@ -48,8 +48,8 @@
     }],
     "post-processors": [{
       "type": "vagrant",
-      "output": "./box/{{user `boxname`}}",
-      "vagrantfile_template": "./win2012R2Core/Vagrantfile",
+      "output": "./box/vagrant-windows7.box",
+      "vagrantfile_template": "./win7/Vagrantfile",
       "compression_level": 9
     }]
   }
