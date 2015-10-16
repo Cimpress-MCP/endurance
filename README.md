@@ -95,7 +95,7 @@ Each of the boxes will have the following packages installed. These can be modif
 
 ### License Keys
 
-All of the included ```Autounattend.xml``` files have no windows activation key set. This can be set
+All of the included ```Autounattend.xml``` files have no Windows activation key set. This can be set
 in the following location in each ```Autounattend.xml```
 
 ```
@@ -115,13 +115,13 @@ This repo has been tested using the following setups. But should work with vario
 #### Windows 8.1:
 * [Vagrant](http://vagrantup.com) - **1.7.4**
 * [Packer](http://packer.io) - **0.8.2**
-* [VirtualBox](https://www.virtualbox.org/wiki/Downloads) - **5.0.0**
+* [VirtualBox](https://www.virtualbox.org/wiki/Downloads) - **5.0.2 r102096**
 * [Ruby](https://www.ruby-lang.org/en/documentation/installation/) - **1.9.3**
 
 #### OSX 10.10.3
 * [Vagrant](http://vagrantup.com) - **1.7.4**
 * [Packer](http://packer.io) - **0.8.2**
-* [VirtualBox](https://www.virtualbox.org/wiki/Downloads) - **5.0.0**
+* [VirtualBox](https://www.virtualbox.org/wiki/Downloads) - **5.0.6 r103037**
 * [Ruby](https://www.ruby-lang.org/en/documentation/installation/) - **1.9.3**
 
 ### ServerSpec
