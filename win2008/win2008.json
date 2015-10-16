@@ -11,7 +11,7 @@
       "iso_checksum_type": "none",
       "guest_os_type": "Windows2008_64",
       "boot_wait": "2m",
-      "headless": false,
+      "headless": true,
       "winrm_username": "vagrant",
       "winrm_password": "vagrant",
       "winrm_timeout": "10m",

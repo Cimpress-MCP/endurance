@@ -21,7 +21,7 @@ Vagrant.configure(2) do |config|
     win7.hostsupdater.aliases = ["win7"]
     win7.vm.provider "virtualbox" do |v|
       v.name = "Win"
-      v.gui = true
+      v.gui = false
     end
     win7.winrm.username = "vagrant"
     win7.winrm.password = "vagrant"
@@ -35,7 +35,7 @@ Vagrant.configure(2) do |config|
     win2008.hostsupdater.aliases = ["win2008"]
     win2008.vm.provider "virtualbox" do |v|
       v.name = "Win2008"
-      v.gui = true
+      v.gui = false
     end
     win2008.winrm.username = "vagrant"
     win2008.winrm.password = "vagrant"
@@ -49,7 +49,7 @@ Vagrant.configure(2) do |config|
     win2012R2.hostsupdater.aliases = ["win2012R2"]
     win2012R2.vm.provider "virtualbox" do |v|
       v.name = "Win2012R2"
-      v.gui = true
+      v.gui = false
     end
     win2012R2.winrm.username = "vagrant"
     win2012R2.winrm.password = "vagrant"
@@ -63,7 +63,7 @@ Vagrant.configure(2) do |config|
     win2012R2core.hostsupdater.aliases = ["win2012R2Core"]
     win2012R2core.vm.provider "virtualbox" do |v|
       v.name = "Win2012R2Core"
-      v.gui = true
+      v.gui = false
     end
     win2012R2core.winrm.username = "vagrant"
     win2012R2core.winrm.password = "vagrant"

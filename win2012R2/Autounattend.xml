@@ -249,7 +249,7 @@
                 <HelpCustomized>false</HelpCustomized>
             </OEMInformation>
             <!-- Rename computer here. -->
-            <ComputerName>VAGRANTWIN2012</ComputerName>
+            <ComputerName>VAGRANTWIN12R2</ComputerName>
             <TimeZone>Eastern Standard Time</TimeZone>
             <RegisteredOwner/>
         </component>
